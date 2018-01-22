@@ -1,0 +1,21 @@
+# ignore all dist files
+/public/build
+dist
+dist/chrome/*
+dist/safari/*
+dist/edge/*
+dist/firefox/*
+dist/server/*
+dist/fallback/*
+/build
+
+
+# ignore node_modules and yarn lock
+node_modules/
+yarn.lock
+
+# ignore vscode entries (best editor ever?!)
+.vscode/
+
+# oh .DS_Store you friendly awesome foe
+.DS_Store
