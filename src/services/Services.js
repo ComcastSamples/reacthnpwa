@@ -1,24 +1,34 @@
 // import axios from 'axios';
 import 'es6-promise/auto';
 import firebase from 'firebase/app';
-import 'firebase/database'
+import 'firebase/database';
 
-const baseUrl = 'https://hacker-news.firebaseio.com'
+const baseUrl = 'https://hacker-news.firebaseio.com';
 const version = '/v0';
 const config = {
 	databaseURL: baseUrl
-}
+};
+const options = {
+	method: 'GET',
+	headers: {
+		Accept: 'application/json'
+	}
+};
 
-firebase.initializeApp(config)
+firebase.initializeApp(config);
 const database = firebase.database().ref(version);
 
 export const getStoryType = (type) => {
-	database.child(`${type}stories`).once('value', snapshot => {
-		const val = snapshot.val()
-		console.log(val)
-	})
-}
+	return database.child(`${type}stories`).once('value');
+};
 
+export const getItem = (id) => {
+	const URL = `${baseUrl}${version}/item/${id}.json`;
+
+	return fetch(URL, options).then((response) => {
+		return response.json();
+	});
+};
 
 // let topStories = {};
 

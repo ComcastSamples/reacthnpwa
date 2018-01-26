@@ -1,38 +1,23 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-// import routes from './constants/Routes';
-import Navigation from './containers/Navigation/Navigation';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Top, News, Show, Ask } from './containers/Navigation/DynamicImport';
-import { getStoryType } from './services/Services';
-
-// class DynamicImport extends Component {
-// 	state = {
-// 		component: null
-// 	};
-
-// 	async componentDidMount() {
-// 		const { path } = this.props;
-// 		const { default: Component } = await import(`${path}`);
-// 		this.setState({ component: <Component {...this.props} /> });
-// 	}
-
-// 	render() {
-// 		const { component } = this.state;
-// 		return <div>{component || <h1>Loading...</h1>}</div>;
-// 	}
-// }
-
+import Navigation from './containers/Navigation/Navigation';
+import Pagination from './containers/Pagination/Pagination';
 class App extends Component {
 	render() {
 		return (
 			<Router>
 				<div>
 					<Navigation />
+					<Pagination />
 					<div className="container">
-						<Route exact path="/" component={Top} />
-						<Route path="/news" component={News} />
-						<Route path="/show" component={Show} />
-						<Route path="/ask" component={Ask} />
+						<Switch>
+							<Route exact path="/" component={Top} />
+							<Route path="/top/:page" component={Top} />
+							<Route path="/news/:page" component={News} />
+							<Route path="/show/:page" component={Show} />
+							<Route path="/ask/:page" component={Ask} />
+						</Switch>
 					</div>
 				</div>
 			</Router>
