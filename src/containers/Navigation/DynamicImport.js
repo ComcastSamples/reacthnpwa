@@ -16,10 +16,6 @@ class DynamicImport extends Component {
 		this.setState({ component: <Component {...this.props} /> });
 	}
 
-	componentWillReceiveProps(nextProps) {
-		console.log(nextProps);
-	}
-
 	render() {
 		const { component: Component } = this.state;
 		return <div>{Component}</div>;
@@ -28,25 +24,4 @@ class DynamicImport extends Component {
 
 DynamicImport.propTypes = {
 	path: PropTypes.func.isRequired
-};
-
-export const Top = (props) => {
-	return (
-		<DynamicImport path={() => import('../../containers/Top')} {...props} />
-	);
-};
-export const News = (props) => {
-	return (
-		<DynamicImport path={() => import('../../containers/News')} {...props} />
-	);
-};
-export const Show = (props) => {
-	return (
-		<DynamicImport path={() => import('../../containers/Show')} {...props} />
-	);
-};
-export const Ask = (props) => {
-	return (
-		<DynamicImport path={() => import('../../containers/Ask')} {...props} />
-	);
 };
