@@ -20,8 +20,8 @@ class App extends Component {
 					<Switch>
 						<Route path="/top/:page?" component={StoryContainer} />
 						<Route path="/news/:page?" component={StoryContainer} />
-						{/* <Route path="/show/:page" component={Show} />
-						<Route path="/ask/:page" component={Ask} /> */}
+						<Route path="/show/:page?" component={StoryContainer} />
+						<Route path="/ask/:page?" component={StoryContainer} />
 						<Route path="*" render={()=> {
 							return <h1>No existe</h1>
 						}} />

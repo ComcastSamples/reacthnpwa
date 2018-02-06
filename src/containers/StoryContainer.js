@@ -15,26 +15,27 @@ class StoryContainer extends Component {
   componentDidMount() {
     const { match } = this.props
     const { url } = match
-    const [ second ] = url.match(/\/([a-z]*)\//, 'g')
 
-    this.validatePage(match.params.page, second)
+    this.validatePage(match.params.page, url)
   }
 
 	componentWillReceiveProps(nextProps) {
     const prevPage = this.props.match.params.page
     const nextPage = nextProps.match.params.page
-    const { url } = nextProps.match
-    const [ second ] = url.match(/\/([a-z]*)\//, 'g')
+    const prevUrl = this.props.match.url
+    const nextUrl = nextProps.match.url
 
-		if(prevPage !== nextPage) {
-			this.validatePage(nextPage, second)
+		if(prevUrl !== nextUrl) {
+			this.validatePage(nextPage, nextUrl)
 		}
   }
 
   validatePage(page, path) {
+    const [ second ] = path.match(/\/([a-z]*)\//, 'g')
+
     this.setState({
       isValidPage: (!isNaN(page)),
-      story: path
+      story: second
     });
     this.setState({ page: page })
   }
