@@ -18,8 +18,10 @@ const options = {
 firebase.initializeApp(config);
 const database = firebase.database().ref(version);
 
-export const getStoryType = (type) => {
-	return database.child(`${type}stories`).once('value');
+export const getStoryType = async (type) => {
+	return await database.child(`${type}stories`).once('value').then(data => {
+		return data.val();
+	})
 };
 
 export const getItem = (id) => {

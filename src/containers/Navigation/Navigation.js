@@ -12,7 +12,7 @@ const Navigation = (props) => {
 					</NavLink>
 				</li>
 				<li>
-					<NavLink to="/news/1" activeClassName="active"isActive={(match,location) => /news/.test(location.pathname)}>
+					<NavLink to="/new/1" activeClassName="active"isActive={(match,location) => /new/.test(location.pathname)}>
 						News
 					</NavLink>
 				</li>
@@ -24,6 +24,11 @@ const Navigation = (props) => {
 				<li>
 					<NavLink to="/ask/1" activeClassName="active" isActive={(match,location) => /ask/.test(location.pathname)}>
 						Ask
+					</NavLink>
+				</li>
+				<li>
+					<NavLink to="/jobs/1" activeClassName="active" isActive={(match,location) => /jobs/.test(location.pathname)}>
+						Jobs
 					</NavLink>
 				</li>
 			</ul>

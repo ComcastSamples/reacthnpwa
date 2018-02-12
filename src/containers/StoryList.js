@@ -1,11 +1,17 @@
 import React from 'react';
+import StoryListItem from './StoryListItem'
 
 const StoryList = (props) => {
-  console.log(props)
+  const { story } = props;
+  let stories = null;
+  if (!story || story === null) {
+    return <h1>Loading...</h1>
+  }
+  
   return (
-    <div>
-
-    </div>
+    <ul>
+      <StoryListItem items={[]}/>
+    </ul>
   );
 }
 
