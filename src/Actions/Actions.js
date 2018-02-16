@@ -2,6 +2,7 @@ import { getStoryType, getItem } from '../services/Services'
 
 export const validatePage = (page, total) => {
   let validPage = !isNaN(page);
+
   if (validPage && total) {
     return page <= total
   }
