@@ -19,7 +19,7 @@ class App extends Component {
 						<Route path="/ask/:page?" component={StoryContainer} />
 						<Route path="/jobs/:page?" component={StoryContainer} />
 						<Route path="*" render={()=> {
-							return <h1>No existe</h1>
+							return <h1>Page don't exist</h1>
 						}} />
 					</Switch>
 					</div>

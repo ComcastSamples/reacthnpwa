@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Pagination from './Pagination/Pagination';
 import StoryList from './StoryList'
-import { validatePage, initStory } from '../Actions/Actions'
+import { validatePage, initStory, listItems } from '../Actions/Actions'
 // import { getStoryType, getItem } from '../services/Services';
 
 class StoryContainer extends Component {
@@ -13,14 +13,14 @@ class StoryContainer extends Component {
       isValidPage: true,
       stories: [],
       totalStories: 0,
-      totalPages: 0
+      totalPages: 0,
+      perPage: 30
     };
   }
 
   componentWillMount() {
     const { match } = this.props
-    const { url } = match
-    const { isValidPage, page, totalPages } = this.state;
+    const { isValidPage, totalPages } = this.state;
 
     if(isValidPage || totalPages !== 0) {
       return;
@@ -28,13 +28,12 @@ class StoryContainer extends Component {
     this.setState({
       isValidPage: validatePage(match.params.page)
     });
-    // this.setPagination(match.params.page, url)
   }
   
   componentDidMount() {
     const { match } = this.props
     const { url } = match
-    const { isValidPage, page } = this.state;
+    const { isValidPage } = this.state;
     if(!isValidPage) {
       return;
     }
@@ -42,102 +41,45 @@ class StoryContainer extends Component {
   }
 
 	componentWillReceiveProps(nextProps) {
-    const { totalPages, page } = this.state;
+    const { totalPages } = this.state;
     const prevUrl = this.props.match.url
     const nextUrl = nextProps.match.url
     const nextPage = nextProps.match.params.page
     const [ , prev ] = prevUrl.match(/\/([a-z]*)\//, 'g')
     const [ , next ] = nextUrl.match(/\/([a-z]*)\//, 'g')
-    let _totalPages = 0
-
-    console.log(prev)
-    console.log(next)
-    console.log(totalPages)
-    console.log(prevUrl)
-    console.log(nextUrl)
-    console.log(nextPage)
 
     if (prev !== next && prevUrl !== nextUrl) {
-      console.log("cambiando story")
+      console.log("new story")
       this.setState({
         totalPages: 0,
         isValidPage: validatePage(nextPage)
       });
       this.callApi(nextPage, next);
-      // this.setState(()=>{
-      //   totalPages: 0,
-      //   isValidPage: validatePage(nextPage)
-      // });
-      // this.setPagination(nextPage, nextUrl)
       return;
     }
-    // this.setPagination(nextPage, nextUrl)
+
 		if(prevUrl !== nextUrl) {
-      console.log("cambiando pagina")
+      console.log("new page")
       this.setState({
-        isValidPage: validatePage(nextPage, totalPages)
+        isValidPage: validatePage(nextPage, totalPages),
+        page: parseInt(nextPage, 10),
+        totalPages
       })
       this.setPagination(nextPage, nextUrl)
+      this.getStoriesItems();
     }
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   const prevUrl = this.props.match.url
-  //   const nextUrl = prevProps.match.url
-  //   const [ , prev ] = prevUrl.match(/\/([a-z]*)\//, 'g')
-  //   const [ , next ] = nextUrl.match(/\/([a-z]*)\//, 'g')
-  //   console.log(prevUrl)
-  //   if(prev !== next) {
-  //     this.setState({
-  //       totalPages: 0
-  //     });
-  //     this.setPagination(this.state.page, prevUrl)
-  //   }
-  // }
 
-  setPagination(page, path) {
-    const [ , story ] = path.match(/\/([a-z]*)\//, 'g')
-    const { isValidPage, totalPages } = this.state;
-    console.log(isValidPage)
-    if (isValidPage && totalPages === 0) {
-      console.log("call api")
-      this.callApi(page, story)
-      // this.setState({
-      //   story,
-      //   page: parseInt(page)
-      // })
-      return;
-    }
+  getStoriesItems() {
+    const { page, totalPages, perPage, isValidPage } = this.state
+    let { stories } = this.state
 
-    this.setState({
-      isValidPage: validatePage(parseInt(page), totalPages),
-      story,
-      page: parseInt(page),
-      totalPages
-    })
-    // console.log(totalPages)
-    // if (totalPages !== 0) {
-    //   console.log("ya existe totalPages")
-    //   this.setState({
-    //     isValidPage: validatePage(parseInt(page), totalPages),
-    //     story,
-    //     page: parseInt(page),
-    //     totalPages
-    //   })
-    //   return;
-    // }
-    // console.log("no existe totalPages")
-    // initStory(story).then(stories => {
-    //   let storiesLength = stories.length
-    //   let _totalPages = Math.ceil( parseInt(storiesLength, 10) / 30 )
+    if (!isValidPage) { return }
 
-    //   this.setState({
-    //     isValidPage: validatePage(parseInt(page), _totalPages),
-    //     story,
-    //     page: parseInt(page),
-    //     totalPages: _totalPages
-    //   })
-    // })
+    stories = listItems(page, perPage, totalPages, stories);
+    this.setState({stories})
+
   }
 
   callApi(page, story) {
@@ -146,67 +88,43 @@ class StoryContainer extends Component {
       let _totalPages = Math.ceil( parseInt(storiesLength, 10) / 30 )
 
       this.setState({
-        isValidPage: validatePage(parseInt(page), _totalPages),
+        isValidPage: validatePage(parseInt(page, 10), _totalPages),
         story,
-        page: parseInt(page),
-        totalPages: _totalPages
+        page: parseInt(page, 10),
+        totalPages: _totalPages,
+        stories
       })
+
+      this.getStoriesItems();
     })
   }
 
-  // getStories() {
-  //   const { isValidPage, story, page } = this.state;
-  //   let _totalPages;
+  setPagination(page, path) {
+    const [ , story ] = path.match(/\/([a-z]*)\//, 'g')
+    const { isValidPage, totalPages } = this.state;
+    if (isValidPage && totalPages === 0) {
+      console.log("calling api")
+      this.callApi(page, story)
+    }
 
-  //   if(!isValidPage) {
-  //     return;
-  //   }
-  //   console.log(isValidPage)
-  //   console.log(story)
-  //   console.log(page)
-  //   getStoryType(story).then((data) => {
-  //     this.setState({
-  //       stories: data.val()
-  //     });
-  //   })
-
-    // _totalPages = data.val().length
-    // this.setState({
-    //   stories: 
-    // })
-    // this.getPages()
-    // this.getStoriesItems()
-  // }
-
-  // getStoriesItems() {
-  //   let { stories } = this.state;
-  //   let storyList = [];
-
-  //   console.log(stories)
-	// 	stories.map((item) => {
-	// 		return storyList.push(getItem(item));
-	// 	});
-	// 	Promise.all(storyList).then((data) => {
-	// 		console.log(data);
-	// 	});
-  // }
+    this.setState({
+      isValidPage: validatePage(parseInt(page, 10), totalPages),
+      story,
+      page: parseInt(page, 10),
+      totalPages
+    })
+  }
 
   render() {
     const { page, isValidPage, story, stories, totalPages } = this.state
-    console.log(story)
-    console.log(page)
-    console.log(totalPages)
-    console.log("render")
-    // if (!totalStories.length === 0) {
-    //   return <h1>Invalid</h1>
-    // }
+    if (!isValidPage) { return }
 
     return (
       <div>
         { (isValidPage && 
         <div>
           <Pagination story={story} page={page} pages={totalPages}/>
-          <StoryList story={story} page={page}/>
+          <StoryList story={story} page={page} stories={stories}/>
         </div>
         ) || <h1>Invalid page</h1>}
       </div>
