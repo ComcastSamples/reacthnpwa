@@ -20,3 +20,13 @@ body {
 	max-width: 980px;
 	margin: 0 auto;
 }
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul li {
+	margin: 10px 0;
+}

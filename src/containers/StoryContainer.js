@@ -18,9 +18,9 @@ class StoryContainer extends Component {
 
   componentWillMount() {
     const { match } = this.props;
-    const { isValidPage, totalPages } = this.state;
+    const { isValidPage } = this.state;
 
-    if (isValidPage || totalPages !== 0) {
+    if (!isValidPage) {
       return;
     }
     this.setState({
@@ -29,9 +29,10 @@ class StoryContainer extends Component {
   }
 
   componentDidMount() {
-    const { page, isValidPage } = this.state;
+    const { isValidPage } = this.state;
     const { match } = this.props;
     const { url } = match;
+    const { page } = match.params;
 
     if (!isValidPage) {
       return;
@@ -72,22 +73,24 @@ class StoryContainer extends Component {
     console.log(story);
     console.log(page);
     getStory(story, page).then((stories) => {
-      console.log(stories);
+      this.setState({
+        stories
+      });
     });
   }
 
   render() {
-    const { page, isValidPage, story, totalPages } = this.state;
+    const { page, isValidPage, story, stories, totalPages } = this.state;
 
     return (
-      <div>
+      <React.Fragment key={"1"}>
         {(isValidPage && (
-          <div>
+          <React.Fragment key={"2"}>
             <Pagination story={story} page={page} pages={totalPages} />
-            <StoryList story={story} page={page} />
-          </div>
+            <StoryList story={story} page={page} stories={stories} />
+          </React.Fragment>
         )) || <h1>Invalid page</h1>}
-      </div>
+      </React.Fragment>
     );
   }
 }
