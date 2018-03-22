@@ -22,6 +22,11 @@ export const validatePage = (page, total) => {
 
 export const getStory = async (type, page) => {
   return await getStoryPage(type, page).then((data) => {
-    return data;
+    return data.map((item, index) => {
+      return {
+        ...item,
+        index
+      };
+    });
   });
 };

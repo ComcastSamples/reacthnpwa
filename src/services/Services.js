@@ -13,9 +13,13 @@ const options = {
 export const getStoryPage = async (type, page) => {
   const URL = `${baseUrl}${version}/${type}/${page}.json`;
 
-  return await fetch(URL, options).then((response) => {
-    return response.json();
-  });
+  return await fetch(URL, options)
+    .then((response) => {
+      return response.json();
+    })
+    .catch((e) => {
+      return "sin datos";
+    });
 };
 
 export const getItem = (id) => {

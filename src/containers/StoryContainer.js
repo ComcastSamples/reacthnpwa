@@ -81,7 +81,7 @@ class StoryContainer extends Component {
 
   render() {
     const { page, isValidPage, story, stories, totalPages } = this.state;
-
+    console.log(stories);
     return (
       <React.Fragment key={"1"}>
         {(isValidPage && (
