@@ -45,7 +45,7 @@ class StoryContainer extends Component {
     const nextUrl = nextProps.match.url;
     const nextPage = nextProps.match.params.page;
     const [, next] = nextUrl.match(/\/([a-z]*)\//, "g");
-
+    
     if (prevUrl !== nextUrl) {
       this.setState({
         isValidPage: validatePage(nextPage),
@@ -70,8 +70,9 @@ class StoryContainer extends Component {
   }
 
   getPages(story, page) {
-    console.log(story);
-    console.log(page);
+    this.setState({
+      stories: []
+    });
     getStory(story, page).then((stories) => {
       this.setState({
         stories
@@ -81,13 +82,13 @@ class StoryContainer extends Component {
 
   render() {
     const { page, isValidPage, story, stories, totalPages } = this.state;
-    console.log(stories);
     return (
       <React.Fragment key={"1"}>
         {(isValidPage && (
           <React.Fragment key={"2"}>
             <Pagination story={story} page={page} pages={totalPages} />
             <StoryList story={story} page={page} stories={stories} />
+            <Pagination story={story} page={page} pages={totalPages} />
           </React.Fragment>
         )) || <h1>Invalid page</h1>}
       </React.Fragment>

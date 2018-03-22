@@ -2,7 +2,8 @@ import React from "react";
 import StoryListItem from "./StoryListItem";
 
 const StoryList = (props) => {
-  const { stories } = props;
+  console.log(props)
+  const { stories, page } = props;
 
   // if (stories.length === 0 || stories === null) {
   //   return <h1>Loading...</h1>;
@@ -11,9 +12,9 @@ const StoryList = (props) => {
   return (
     (stories.length !== 0 && (
       <ul>
-        <StoryListItem items={stories} />
+        <StoryListItem stories={stories} page={page}/>
       </ul>
-    )) || <h1>No data</h1>
+    )) || <h1>Loading...</h1>
   );
 };
 
