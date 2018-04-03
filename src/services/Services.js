@@ -24,7 +24,13 @@ export const getStoryPage = async (type, page) => {
 
 export const getItem = (id) => {
   const URL = `${baseUrl}${version}/item/${id}.json`;
+  return fetch(URL, options).then((response) => {
+    return response.json();
+  });
+};
 
+export const getUser = (user) => {
+  const URL = `${baseUrl}${version}/user/${user}.json`;
   return fetch(URL, options).then((response) => {
     return response.json();
   });

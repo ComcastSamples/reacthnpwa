@@ -12,6 +12,14 @@ const StoryContainer = AsyncComponent(() =>
   import("./containers/StoryContainer")
 );
 
+const ItemContainer = AsyncComponent(() =>
+  import("./containers/ItemContainer")
+);
+
+const UserContainer = AsyncComponent(() =>
+  import("./containers/UserContainer")
+);
+
 class App extends Component {
   render() {
     return (
@@ -25,6 +33,8 @@ class App extends Component {
               <Route path="/show/:page?" component={StoryContainer} />
               <Route path="/ask/:page?" component={StoryContainer} />
               <Route path="/jobs/:page?" component={StoryContainer} />
+              <Route path="/item/:item" component={ItemContainer} />
+              <Route path="/user/:user" component={UserContainer} />
               <Route
                 path="*"
                 render={() => {

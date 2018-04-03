@@ -1,4 +1,4 @@
-import { getStoryPage } from "../services/Services";
+import { getStoryPage, getItem } from "../services/Services";
 
 export const getTotalPages = (story) => {
   const totalPages = {
@@ -20,6 +20,12 @@ export const validatePage = (page, total) => {
   return validPage;
 };
 
+export const validateItem = (item) => {
+  let isValidItem = !isNaN(item);
+  let validItem = isValidItem && +item.length === 8
+  return validItem;
+};
+
 export const getStory = async (type, page) => {
   return await getStoryPage(type, page).then((data) => {
     return data.map((item, index) => {
@@ -28,5 +34,11 @@ export const getStory = async (type, page) => {
         index
       };
     });
+  });
+};
+
+export const getStoryItem = async (item) => {
+  return await getItem(item).then((data) => {
+    return data;
   });
 };
