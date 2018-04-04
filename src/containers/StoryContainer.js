@@ -45,7 +45,7 @@ class StoryContainer extends Component {
     const nextUrl = nextProps.match.url;
     const nextPage = nextProps.match.params.page;
     const [, next] = nextUrl.match(/\/([a-z]*)\//, "g");
-    
+
     if (prevUrl !== nextUrl) {
       this.setState({
         isValidPage: validatePage(nextPage),

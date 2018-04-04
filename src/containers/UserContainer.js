@@ -1,32 +1,43 @@
 import React, { Component } from "react";
-// import Pagination from "./Pagination/Pagination";
-// import StoryList from "./StoryList";
-// import { validatePage, getStory, getTotalPages } from "../Actions/Actions";
-// import { getStoryType, getItem } from '../services/Services';
+import { getStoryUser } from "../Actions/Actions";
 
 class UserContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-  }
-
-  componentWillMount() {
-
+    this.state = {
+      user: null
+    };
   }
 
   componentDidMount() {
-
+    const { match: { params: { user } } } = this.props;
+    this.setUser(user);
   }
 
-  componentWillReceiveProps(nextProps) {
-
+  setUser(user) {
+    getStoryUser(user).then((data) => {
+      this.setState({ user: data });
+    });
   }
 
   render() {
+    const { user } = this.state;
+    console.log(user);
+
     return (
-      <React.Fragment key={"1"}>
-        <h1>Hola item</h1>
-      </React.Fragment>
+      (user && (
+        <React.Fragment key={"1"}>
+          <div style={{ margin: "30px 15px" }}>
+            <p className="story-details_user">
+              <span>
+                <strong>${user.id}</strong>
+                {` joined ${user.created}`}
+              </span>
+            </p>
+            <p>{user.about}</p>
+          </div>
+        </React.Fragment>
+      )) || <h1>Loading user...</h1>
     );
   }
 }

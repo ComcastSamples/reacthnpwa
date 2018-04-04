@@ -7,9 +7,9 @@ const StoryList = (props) => {
   return (
     (stories.length !== 0 && (
       <ul>
-        <StoryListItem stories={stories} page={page}/>
+        <StoryListItem stories={stories} page={page} />
       </ul>
-    )) || <h1>Loading...</h1>
+    )) || <h1 style={{ margin: "0 15px" }}>Loading stories...</h1>
   );
 };
 
