@@ -22,7 +22,6 @@ class UserContainer extends Component {
 
   render() {
     const { user } = this.state;
-    console.log(user);
 
     return (
       (user && (
