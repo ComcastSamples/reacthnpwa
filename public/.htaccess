@@ -1,3 +1,20 @@
+<filesMatch ".(jpg|jpeg|png|ico)$">
+  Header set Cache-Control "max-age=31536000, public"
+</filesMatch>
+<filesMatch ".(css|js)$">
+  Header set Cache-Control "max-age=31536000, public"
+</filesMatch>
+<IfModule mod_deflate.c>
+  # Compress HTML, CSS, JavaScript, Text, XML and fonts
+  AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-ja
+vascript application/javascript
+  # Remove browser bugs (only needed for really old browsers)
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+  Header append Vary User-Agent
+</IfModule>
+Options -Indexes
 Options -MultiViews
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
