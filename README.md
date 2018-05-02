@@ -1,2 +1,2 @@
-# reacthnpwa
+# HNPWA
 Hacker News PWA with react
