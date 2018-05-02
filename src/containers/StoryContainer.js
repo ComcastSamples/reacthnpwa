@@ -89,7 +89,7 @@ class StoryContainer extends Component {
             <Pagination story={story} page={page} pages={totalPages} />
             <StoryList story={story} page={page} stories={stories} />
           </React.Fragment>
-        )) || <h1>Invalid page</h1>}
+        )) || <h1 style={{margin: "15px"}}>Invalid page</h1>}
       </React.Fragment>
     );
   }

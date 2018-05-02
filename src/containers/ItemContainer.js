@@ -53,7 +53,7 @@ class ItemContainer extends Component {
       <React.Fragment key={"1"}>
         {(isValidItem && (
           <Comments comments={comments}/>
-        )) || <h1>Invalid ITem</h1>}
+        )) || <h1 style={{margin: "15px"}}>Invalid ITem</h1>}
       </React.Fragment>
     );
   }

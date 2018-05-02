@@ -37,6 +37,9 @@ p {
 	margin-bottom: 15px;
 	display:flex;
 }
+.story-container {
+	padding: 0 15px 0 0;
+}
 
 .story_title {
 	color: #263238;

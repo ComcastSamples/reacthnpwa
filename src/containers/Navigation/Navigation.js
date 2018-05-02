@@ -7,6 +7,9 @@ const Navigation = (props) => {
     <div className="navigation">
       <ul className="navigation-nav">
         <li>
+          <a href="/" aria-label="Home"><img width="20" height="18" alt="react logo" src="/img/react_logo.png"/></a>
+        </li>
+        <li>
           <NavLink
             to="/news/1"
             activeClassName="active"

@@ -36,7 +36,7 @@ class UserContainer extends Component {
             <p>{user.about}</p>
           </div>
         </React.Fragment>
-      )) || <h1>Loading user...</h1>
+      )) || <h1 style={{margin: "15px"}}>Loading user...</h1>
     );
   }
 }

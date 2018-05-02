@@ -17,7 +17,7 @@ export default function asyncComponent(importComponent) {
 
     render() {
       const { module: Component } = this.state;
-      return Component ? <Component {...this.props} /> : <h1>Loading...</h1>;
+      return Component ? <Component {...this.props} /> : <h1 style={{margin: "15px"}}>Loading...</h1>;
     }
   }
 

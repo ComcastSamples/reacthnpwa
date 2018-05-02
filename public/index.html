@@ -5,19 +5,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="theme-color" content="#000000">
-  <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
+    <meta name="keywords" content="react hn, react, hacker news, pwa, hacker news pwa, react hacker news pwa">
+    <meta name="description" content="Hacker News experiment using react as Progressive Web App, from https://hnpwa.com/">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Cache-control" content="max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-  <!-- Add to home screen for Safari on iOS -->
+  <meta name="mobile-web-app-capable" content="yes">
+
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="React HN PWA">
-  <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
-  <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
-  <meta name="msapplication-TileColor" content="#2F3BA2">
+  <link rel="apple-touch-icon" type="image/png" href="img/apple-touch-icon-114x102.png">
+  <link rel="apple-touch-icon" type="image/png" href="img/apple-touch-icon-120x108.png">
+  <link rel="apple-touch-icon" type="image/png" href="img/apple-touch-icon-152x136.png">
+  <link rel="icon" type="image/png" href="%PUBLIC_URL%/img/favicon-32x29.png" sizes="32x29">
+  <link rel="icon" type="image/png" href="%PUBLIC_URL%/img/android-chrome-192x172.png" sizes="192x172">
+  <link rel="icon" type="image/png" href="%PUBLIC_URL%/img/favicon-96x86.png" sizes="96x86">
+  <link rel="icon" type="image/png" href="%PUBLIC_URL%/img/favicon-16x14.png" sizes="16x14">
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -34,7 +41,7 @@
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
-  <div id="root"></div>
+  <div role="main" id="root"></div>
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

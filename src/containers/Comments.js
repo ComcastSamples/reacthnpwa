@@ -68,7 +68,7 @@ const Comments = (props) => {
           <ul style={{ paddingLeft: "15px" }}>{nodes}</ul>
         </div>
       </React.Fragment>
-    )) || <h1>Loading comments...</h1>
+    )) || <h1 style={{margin: "15px"}}>Loading comments...</h1>
   );
 };
 export default Comments;

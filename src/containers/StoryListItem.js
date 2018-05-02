@@ -7,20 +7,20 @@ const StoryListItem = (props) => {
   return stories.map((story) => {
     let currentPage = parseInt(page, 10);
     let storyNumber =
-      currentPage !== 1 ? currentPage * 30 + story.index + 1 : story.index + 1;
+      currentPage !== 1 ? (currentPage * 30) - 30 + story.index + 1 : story.index + 1;
 
     return (
       <React.Fragment key={story.id}>
         <li className="story" key={story.id}>
           <span className="story_number">{storyNumber}</span>
           <div className="story_title">
-            <a href={story.url} className="story-title_link">
+            <a href={story.url} aria-label="Story url" className="story-title_link">
               {story.title}
             </a>
             <div className="story_details">
               <span className="story-details_points">
                 {`${story.points} points | by `}
-                <a className="story-details_user" href={`/user/${story.user}`}>
+                <a className="story-details_user" aria-label="Story user" href={`/user/${story.user}`}>
                   {story.user}
                 </a>
                 {` | ${story.time_ago} | `}

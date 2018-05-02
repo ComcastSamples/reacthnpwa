@@ -1,15 +1,29 @@
 {
   "short_name": "React HN PWA",
   "name": "React HN PWA",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    }
-  ],
+  "icons": [{
+    "src": "img/apple-touch-icon-120x108.png",
+    "sizes": "120x108",
+    "type": "image/png"
+  }, {
+    "src": "img/apple-touch-icon-152x136.png",
+    "sizes": "152x136",
+    "type": "image/png"
+  }, {
+    "src": "img/android-chrome-144x129.png",
+    "sizes": "144x129",
+    "type": "image/png"
+  }, {
+    "src": "img/android-chrome-192x192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  },{
+    "src": "img/splashscreen-icon-512x512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#61dafb",
+  "background_color": "#000000"
 }
